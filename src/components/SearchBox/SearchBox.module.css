@@ -1,0 +1,21 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 64px;
+}
+
+.search-field {
+  padding: 8px 16px;
+  width: 300px;
+  max-width: 450px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #000000;
+}
+
+.search-field:hover,
+.search-field:focus {
+  border-color: red;
+}

@@ -1,0 +1,52 @@
+.form-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 64px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  position: relative;
+}
+
+.input-field {
+  padding: 8px 16px;
+  width: 300px;
+  max-width: 450px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #000000;
+}
+
+.input-field:hover,
+.input-field:focus {
+  border-color: red;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  bottom: -20px;
+  font-size: 12px;
+}
+
+.submit-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #000000;
+  transition: all 200ms ease-in-out;
+  background-color: transparent;
+  height: 30px;
+}
+
+.submit-btn:hover {
+  scale: 1.05;
+  background-color: #ffffff;
+  border-color: red;
+  color: red;
+}

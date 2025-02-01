@@ -1,0 +1,40 @@
+.contact-block {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid #000000;
+  border-radius: 12px;
+  padding: 10px;
+  align-items: center;
+}
+
+.contact-block:hover {
+  border-color: red;
+}
+.contact-block:hover .inf-sec-hover {
+  color: red;
+}
+
+.inf-sec {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.del-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #000000;
+  transition: all 200ms ease-in-out;
+  height: 30px;
+  background-color: transparent;
+}
+
+.del-btn:hover {
+  scale: 1.05;
+  background-color: #ffffff;
+  border-color: red;
+  color: red;
+}
