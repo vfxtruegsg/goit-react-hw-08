@@ -1,7 +1,11 @@
 import { Field, Formik, Form } from "formik";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { registerThunk } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     name: "",
     email: "",
@@ -9,7 +13,7 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    dispatch(registerThunk(values));
     actions.resetForm();
   };
 
@@ -17,12 +21,12 @@ const RegistrationForm = () => {
     <div className="min-h-screen flex flex-col justify-center items-center">
       <h3 className="text-center font-bold text-xl ">Register</h3>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className="rounded-3xl bg-white flex flex-col shadow-xl gap-4 p-6 w-1/5">
+        <Form className="rounded-3xl bg-white flex flex-col shadow-xl gap-4 p-6 w-full max-w-sm">
           <label className="flex flex-col gap-2">
             <span>Name:</span>
             <Field
               className="p-2.5 border-1-black outline-none shadow-md rounded-md hover:shadow-xl focus:shadow-xl"
-              name="Name"
+              name="name"
               type="text"
             />
           </label>

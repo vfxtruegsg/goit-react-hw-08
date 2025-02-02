@@ -15,7 +15,7 @@ const LoginForm = () => {
     <div className="min-h-screen flex flex-col justify-center items-center">
       <h3 className="text-center font-bold text-xl">Login</h3>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className="rounded-3xl bg-white flex flex-col shadow-xl gap-4 p-6 w-1/5">
+        <Form className="rounded-3xl bg-white flex flex-col shadow-xl gap-4 p-6 w-full max-w-sm">
           <label className="flex flex-col gap-2">
             <span>Email:</span>
             <Field

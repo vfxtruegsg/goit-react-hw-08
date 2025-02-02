@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectError, selectLoading } from "../../redux/contactsSlice";
+import { selectError, selectLoading } from "../../redux/contacts/selectors";
 import { useEffect } from "react";
-import { fetchContacts } from "../../redux/contactsOps";
+import { fetchContacts } from "../../redux/contacts/operations";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { TailSpin } from "react-loader-spinner";
