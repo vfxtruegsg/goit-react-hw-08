@@ -1,11 +1,11 @@
 import { Field, Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerThunk } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     email: "",
@@ -13,7 +13,10 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = (values, actions) => {
-    dispatch(registerThunk(values));
+    dispatch(registerThunk(values))
+      .unwrap()
+      .then(() => navigate("/"));
+
     actions.resetForm();
   };
 
@@ -47,7 +50,7 @@ const RegistrationForm = () => {
             />
           </label>
           <button
-            className="cursor-pointer btn btn-secondary rounded-xl"
+            className="cursor-pointer btn btn-error rounded-xl"
             type="submit"
           >
             Register
@@ -55,7 +58,7 @@ const RegistrationForm = () => {
           <p className="text-xs">
             Already have an account?{" "}
             <Link
-              className="text-pink-500 hover:text-pink-700 transition-all duration-200"
+              className="text-red-500 hover:text-red-700 transition-all duration-200"
               to="/login"
             >
               Login
