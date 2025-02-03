@@ -47,7 +47,7 @@ const EditForm = () => {
       onSubmit={submitForm}
       validationSchema={FeedbackSchema}
     >
-      <Form className="flex flex-col justify-center items-center gap-6 mb-24">
+      <Form className="flex flex-col justify-center items-center gap-6 mb-24 ">
         <div
           style={{ position: "relative" }}
           className="flex flex-col gap-2 w-2/3"
@@ -58,7 +58,7 @@ const EditForm = () => {
             name="name"
             style={{ outline: "none" }}
             id={nameFieldId}
-            className="p-3 rounded-xl hover:border-red-400"
+            className="p-3 rounded-xl hover:border-red-400 sm:max-w-md"
           />
           <ErrorMessage
             className={formStyles["error"]}
@@ -77,7 +77,7 @@ const EditForm = () => {
             style={{ outline: "none" }}
             id={numberFieldId}
             placeholder="xxx-xx-xx"
-            className="p-3 rounded-xl hover:border-red-400"
+            className="p-3 rounded-xl hover:border-red-400 sm:max-w-md"
           />
           <ErrorMessage
             className={formStyles["error"]}
