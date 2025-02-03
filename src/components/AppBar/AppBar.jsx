@@ -7,7 +7,7 @@ import UserMenu from "../UserMenu/UserMenu";
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <div className="flex justify-between p-4 items-center bg-red-500 mb-12">
+    <div className="flex flex-col justify-between p-4 items-center bg-red-400  sm:flex-row">
       <Navigation />
 
       {!isLoggedIn ? <AuthNav /> : <UserMenu />}

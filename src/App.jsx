@@ -6,22 +6,53 @@ import Layout from "./components/Layout/Layout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import ContactsPage from "./pages/ContactsPage/ContactsPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { refreshThunk } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import PublicRoute from "./components/PublicRoute/PublicRoute";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
-        </Route>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]);
 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
+  return isRefreshing ? null : (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }
+      >
+        <Route index element={<HomePage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+      </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <RegistrationPage />
+          </PublicRoute>
+        }
+      />
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { goitAPI } from "../contacts/operations";
+import toast from "react-hot-toast";
 
 export const setAuthHeader = (token) => {
   goitAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -14,6 +14,10 @@ export const registerThunk = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
+      if (error.response.data.code == 11000) {
+        toast.error("This user is already registered");
+        return thunkAPI.rejectWithValue(error.message);
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -37,7 +41,24 @@ export const logoutThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await goitAPI.post("users/logout");
-      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshThunk = createAsyncThunk(
+  "user/refresh",
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue("Token not found");
+    }
+    setAuthHeader(savedToken);
+
+    try {
+      const { data } = await goitAPI.get("users/current");
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

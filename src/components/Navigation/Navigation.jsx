@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <div>
       {isLoggedIn && (
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center justify-between">
           <NavLink
             className="text-white p-3 hover:scale-125 duration-300 ease-in-out"
             to="/"

@@ -7,7 +7,7 @@ const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
-    <ul className={clStyles["contact-list"]}>
+    <ul style={{ marginBottom: 48 }} className={clStyles["contact-list"]}>
       {filteredContacts.map((item, index) => (
         <Contact
           key={index}

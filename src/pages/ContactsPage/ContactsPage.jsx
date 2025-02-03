@@ -5,18 +5,25 @@ import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { TailSpin } from "react-loader-spinner";
 import ContactList from "../../components/ContactList/ContactList";
-import { selectError, selectLoading } from "../../redux/contacts/selectors";
+import {
+  selectError,
+  selectIsOpenFieldForEdit,
+  selectLoading,
+} from "../../redux/contacts/selectors";
+import EditForm from "../../components/EditForm/EditForm";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const loader = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const editFieldIsOpen = useSelector(selectIsOpenFieldForEdit);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginBottom: 18 }}>Phonebook</h1>
+      <h1 className="text-center mb-4 mt-12 text-2xl">Phonebook</h1>
       <ContactForm />
       <SearchBox />
       {loader && (
@@ -42,8 +49,7 @@ const ContactsPage = () => {
           />
         </div>
       )}
-
-      <ContactList />
+      {editFieldIsOpen ? <EditForm /> : <ContactList />}
     </div>
   );
 };
