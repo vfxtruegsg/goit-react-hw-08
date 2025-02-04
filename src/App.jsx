@@ -12,6 +12,7 @@ import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,34 +23,32 @@ function App() {
 
   return isRefreshing ? null : (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <Layout />
-          </PrivateRoute>
-        }
-      >
+      <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute>
+              <ContactsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegistrationPage />}
+            />
+          }
+        />
       </Route>
-
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <LoginPage />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <PublicRoute>
-            <RegistrationPage />
-          </PublicRoute>
-        }
-      />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

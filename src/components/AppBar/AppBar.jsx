@@ -10,7 +10,7 @@ const AppBar = () => {
     <div className="flex flex-col justify-between p-4 items-center bg-red-400  sm:flex-row">
       <Navigation />
 
-      {!isLoggedIn ? <AuthNav /> : <UserMenu />}
+      {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </div>
   );
 };
