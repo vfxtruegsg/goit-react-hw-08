@@ -1,7 +1,7 @@
 import cntStyles from "./Contact.module.css";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdPerson } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
 
@@ -15,7 +15,7 @@ const Contact = ({ name, number, id }) => {
   };
 
   const openFieldForEdit = () => {
-    dispatch(isEditField(true));
+    dispatch(isEditField({ isOpen: true, contactId: id }));
   };
   return (
     <li className={cntStyles["contact-block"]}>

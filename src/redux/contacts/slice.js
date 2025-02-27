@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   error: null,
   isOpenFieldForEdit: false,
+  editContactId: null,
 };
 
 export const contactsSlice = createSlice({
@@ -20,7 +21,8 @@ export const contactsSlice = createSlice({
 
   reducers: {
     isEditField: (state, action) => {
-      state.isOpenFieldForEdit = action.payload;
+      state.isOpenFieldForEdit = action.payload.isOpen;
+      state.editContactId = action.payload.contactId;
     },
   },
   extraReducers: (builder) => {
@@ -41,7 +43,7 @@ export const contactsSlice = createSlice({
         state.error = false;
         state.loading = false;
         const { id, name, number } = action.payload;
-        const todo = state.find((task) => task.id === id);
+        const todo = state.items.find((task) => task.id == id);
         if (todo) {
           todo.name = name;
           todo.number = number;

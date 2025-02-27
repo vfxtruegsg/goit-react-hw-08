@@ -21,16 +21,6 @@ const slice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      // .addCase(registerThunk.fulfilled, (state, action) => {
-      //   state.user = action.payload.user;
-      //   state.isLoggedIn = true;
-      //   state.token = action.payload.token;
-      // })
-      // .addCase(loginThunk.fulfilled, (state, action) => {
-      //   state.user = action.payload.user;
-      //   state.isLoggedIn = true;
-      //   state.token = action.payload.token;
-      // })
 
       .addCase(refreshThunk.pending, (state) => {
         state.isRefreshing = true;

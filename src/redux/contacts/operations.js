@@ -23,7 +23,6 @@ export const addContact = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const { data } = await goitAPI.post("/contacts", body);
-      console.log(data);
 
       return data;
     } catch (error) {
@@ -46,12 +45,20 @@ export const deleteContact = createAsyncThunk(
 
 export const editContact = createAsyncThunk(
   "contacts/editContact",
-  async (id, thunkAPI) => {
-    try {
-      const { data } = await goitAPI.patch(`/contacts/${id}`, id);
-      console.log(data);
+  async (values, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue("Token not found");
+    }
 
-      setAuthHeader(data.token);
+    setAuthHeader(savedToken);
+
+    try {
+      const { data } = await goitAPI.patch(`/contacts/${values.id}`, {
+        name: values.name,
+        number: values.number,
+      });
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

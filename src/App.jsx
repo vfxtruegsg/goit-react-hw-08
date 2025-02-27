@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import PublicRoute from "./components/PublicRoute/PublicRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 
 function App() {
